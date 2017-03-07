@@ -1,6 +1,6 @@
 #include "Interpreter.h"
 
-const std::string code = ",[--.]";
+const std::string code = ",[---.]";
 
 int main()
 {

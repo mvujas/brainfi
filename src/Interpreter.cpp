@@ -95,7 +95,7 @@ void Interpreter::command(char cmd) {
             loops.push(current_line);
             break;
         case ']':
-            if(registers[current_register]) {
+            if(registers[current_register] > 0) {
                current_line = loops.top();
                loops.pop();
                --current_line;
