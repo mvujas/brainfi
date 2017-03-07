@@ -1,7 +1,7 @@
 # Brainfuck Interpreter
 Written in C++
 
-## Brainfuck syntax
+### Brainfuck syntax
 ```brainfuck
 > 	Increment the pointer.
 < 	Decrement the pointer.
@@ -13,7 +13,7 @@ Written in C++
 ] 	Jump backward to the matching [ unless the byte at the pointer is zero.
 ```
 
-### How to execute
+### How to compile
 ```bash
 git clone https://github.com/mvujas/brainfuck_interpreter
 cd brainfuck_interpreter
