@@ -4,33 +4,21 @@ inline lld max(lld a, lld b) {
     return (a > b) ? a : b;
 }
 
-Interpreter::Interpreter(std::string in) {
-    preProcess(in);
-    if(!error.empty())
-        printf("%s\n", error.c_str());
-    else
-        mainloop();
-}
+Interpreter::Interpreter() :
+    max_registers(1),
+    registers(std::vector<int>(1, 0)),
+    current_register(0) { }
 
 Interpreter::~Interpreter() { }
 
 void Interpreter::preProcess(std::string in) {
     std::string out = "";
     lld length = in.length();
-    std::string err = "";
-    lld reg = 0, loop = 0, maxreg = 0;
+    lld loop = 0;
     for(lld i = 0; i <= length - 1; ++i) {
         switch(in[i]) {
-            case '>': {
-                out += in[i];
-                ++reg;
-            }
-            break;
-            case '<': {
-                out += in[i];
-                --reg;
-            }
-            break;
+            case '>':
+            case '<':
             case '+':
             case '-':
             case '.':
@@ -48,25 +36,17 @@ void Interpreter::preProcess(std::string in) {
             }
             break;
         }
-        maxreg = max(reg, maxreg);
-        if(reg < 0) {
-            err = "Memory error: -1";
-            break;
-        }
         if(loop < 0) {
-            err = "Mismatched parentheses.";
+            error = "Mismatched parentheses.";
             break;
         }
     }
     if(loop)
-        err = "Mismatched parentheses.";
+        error = "Mismatched parentheses.";
     code_length = out.length();
-    error = err;
-    for(lld i = maxreg + 1; i--;)
-        registers.push_back(0);
-    max_registers = maxreg + 1;
+    if(!error.empty())
+        printf("%s\n", error.c_str());
     code_length = out.length();
-    current_register = 0;
     current_line = 0;
     code = out;
 }
@@ -75,9 +55,18 @@ void Interpreter::command(char cmd) {
     switch(cmd) {
         case '>':
             ++current_register;
+            if(current_register == max_registers) {
+                ++max_registers;
+                registers.push_back(0);
+            }
             break;
         case '<':
             --current_register;
+            if(current_register < 0) {
+                error = "Memory error: -1";
+                printf("%s\n", error.c_str());
+                current_register = 0;
+            }
             break;
         case '+':
             ++registers[current_register];
@@ -105,7 +94,8 @@ void Interpreter::command(char cmd) {
     ++current_line;
 }
 
-void Interpreter::mainloop() {
-    while(code_length - current_line)
+void Interpreter::execute(std::string source) {
+    preProcess(source);
+    while((code_length - current_line) && error.empty())
         command(code[current_line]);
 }
