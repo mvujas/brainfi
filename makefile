@@ -40,9 +40,9 @@ OBJDIR_RELEASE = obj/Release
 DEP_RELEASE = 
 OUT_RELEASE = bin/Release/brainfuckInterpreter
 
-OBJ_DEBUG = $(OBJDIR_DEBUG)/main.o $(OBJDIR_DEBUG)/src/Interpreter.o
+OBJ_DEBUG = $(OBJDIR_DEBUG)/main.o $(OBJDIR_DEBUG)/src/Interpreter.o $(OBJDIR_DEBUG)/src/path.o
 
-OBJ_RELEASE = $(OBJDIR_RELEASE)/main.o $(OBJDIR_RELEASE)/src/Interpreter.o
+OBJ_RELEASE = $(OBJDIR_RELEASE)/main.o $(OBJDIR_RELEASE)/src/Interpreter.o $(OBJDIR_RELEASE)/src/path.o
 
 all: debug release
 
@@ -65,6 +65,9 @@ $(OBJDIR_DEBUG)/main.o: main.cpp
 
 $(OBJDIR_DEBUG)/src/Interpreter.o: src/Interpreter.cpp
 	$(CXX) $(CFLAGS_DEBUG) $(INC_DEBUG) -c src/Interpreter.cpp -o $(OBJDIR_DEBUG)/src/Interpreter.o
+
+$(OBJDIR_DEBUG)/src/path.o: src/path.cpp
+	$(CXX) $(CFLAGS_DEBUG) $(INC_DEBUG) -c src/path.cpp -o $(OBJDIR_DEBUG)/src/path.o
 
 clean_debug: 
 	rm -f $(OBJ_DEBUG) $(OUT_DEBUG)
@@ -89,6 +92,9 @@ $(OBJDIR_RELEASE)/main.o: main.cpp
 
 $(OBJDIR_RELEASE)/src/Interpreter.o: src/Interpreter.cpp
 	$(CXX) $(CFLAGS_RELEASE) $(INC_RELEASE) -c src/Interpreter.cpp -o $(OBJDIR_RELEASE)/src/Interpreter.o
+
+$(OBJDIR_RELEASE)/src/path.o: src/path.cpp
+	$(CXX) $(CFLAGS_RELEASE) $(INC_RELEASE) -c src/path.cpp -o $(OBJDIR_RELEASE)/src/path.o
 
 clean_release: 
 	rm -f $(OBJ_RELEASE) $(OUT_RELEASE)
