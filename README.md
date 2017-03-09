@@ -1,4 +1,4 @@
-# Brainfi
+# brainfi
 Brainfuck interpreter written in C++
 
 ### Brainfuck syntax
