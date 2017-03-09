@@ -1,5 +1,5 @@
-# Brainfuck Interpreter
-Written in C++
+# Brainfi
+Brainfuck interpreter written in C++
 
 ### Brainfuck syntax
 ```brainfuck
