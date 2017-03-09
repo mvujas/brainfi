@@ -4,11 +4,12 @@
 #include <fstream>
 #include <unistd.h>
 
-void version() {
-    printf("version: %s", BFI_VERSION);
+void startup_notification() {
+    printf("Brainfuck interpreter 'brainfi'\nVersion: %s (updated on %s)\n", BFI_VERSION, LAST_UPDATE);
 }
 
 void command_line_interface() {
+    startup_notification();
     Interpreter brainfi;
     std::string input;
     while(true) {

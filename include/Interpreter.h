@@ -1,6 +1,8 @@
 #ifndef INTERPRETER_H
 #define INTERPRETER_H
 #define BFI_VERSION "0.0.1"
+#define LAST_UPDATE "2017-03-09"
+#define AUTHOR "Milos Vujasinovic"
 #include <bits/stdc++.h>
 typedef long long lld;
 
