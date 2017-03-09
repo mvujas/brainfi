@@ -18,5 +18,7 @@ Brainfuck interpreter written in C++
 git clone https://github.com/mvujas/brainfuck_interpreter
 cd brainfuck_interpreter
 make
+# If you want to be able to use brainfi anywhere on your system uncomment following command. Don't do it if you don't understand what it does
+#sudo cp bin/Debug/brainfuckInterpreter /usr/bin/brainfi
 ```
 
